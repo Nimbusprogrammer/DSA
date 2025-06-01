@@ -2,7 +2,9 @@ class Solution {
 public:
     string longestPalindrome(string s) {
         // for each palindrome lets consider 2 types of palindromes like  "aiia" evenlenth sub palindrome
-        //and "tayat" odd length palindrome .
+         //and "tayat" odd length palindrome .
+        // so logic is we are taking every digit as a center in to find all the odd length palindromes first in O(N2) logic and then we are finding even length palindromes in O(N2) logic while considering low and high as starting points of palindromes right .
+       
         if ( s.length() <= 1) return s;
         int n = s.size();
         string ans;

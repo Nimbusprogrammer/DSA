@@ -9,18 +9,16 @@
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
-        unordered_set <ListNode*> contain;
-        if ( head == nullptr )
-        return false;
-        while ( head )
+        //O(1) space solution : tortoise and hare logic 
+        ListNode* tortoise = head;
+        ListNode* hare = head;
+        while ( tortoise != nullptr && hare != nullptr && hare->next != nullptr )
         {
-            if ( contain.find( head ) == contain.end())
-            {
-                contain.insert(head);
-                head = head->next;
-            }
-            else 
+            tortoise = tortoise->next;
+            hare = hare->next->next;
+            if ( tortoise == hare)
             return true;
+            
         }
         return false;
     }

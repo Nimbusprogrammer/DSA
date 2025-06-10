@@ -12,7 +12,7 @@ public:
         //O(1) space solution : tortoise and hare logic 
         ListNode* tortoise = head;
         ListNode* hare = head;
-        while ( tortoise != nullptr && hare != nullptr && hare->next != nullptr )
+        while ( hare != nullptr && hare->next != nullptr )
         {
             tortoise = tortoise->next;
             hare = hare->next->next;

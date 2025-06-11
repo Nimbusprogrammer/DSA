@@ -16,15 +16,15 @@ public:
         return true;
         ListNode* slow = head;
         ListNode* fast = head;
-        ListNode* before = head;
+        
         while( fast != nullptr &&  fast->next != nullptr)
         {
-            before = slow;
+            
             slow = slow->next;
             fast = fast->next->next;
 
         }
-        before->next = nullptr;
+        
         ListNode* prev = nullptr;
         while ( slow != nullptr)//reversing the second half of the sll
         {
@@ -33,13 +33,13 @@ public:
            prev = slow;
            slow = front;
         }
-        while ( head != nullptr && prev != nullptr)
-        {
-            if ( head->val != prev->val )
-            return false;
-            head = head->next;
-            prev = prev->next;
-        }
-        return true;
+       while ( prev )
+       {
+           if ( head ->val != prev->val)
+           return false;
+           head = head->next;
+           prev = prev->next;
+       }
+       return true;
     }
 };

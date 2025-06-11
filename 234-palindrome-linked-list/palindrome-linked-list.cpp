@@ -11,21 +11,35 @@
 class Solution {
 public:
     bool isPalindrome(ListNode* head) {
-        vector<int> ans;
-        if ( head == nullptr)
-        return false;
-        ListNode* tail = head;
-        ListNode* start = head;
-        while ( start )
-        {
-           ans.push_back(start->val);
-           start = start->next;
-        }
-        vector<int> ans2 = ans;
-        reverse(ans2.begin() , ans2.end());
-        if ( ans == ans2)
+        //find the middle of the linked list using tortoise & heir method
+        if  ( head ->next == nullptr)
         return true;
-        else 
-        return false;
+        ListNode* slow = head;
+        ListNode* fast = head;
+        ListNode* before = head;
+        while( fast != nullptr &&  fast->next != nullptr)
+        {
+            before = slow;
+            slow = slow->next;
+            fast = fast->next->next;
+
+        }
+        before->next = nullptr;
+        ListNode* prev = nullptr;
+        while ( slow != nullptr)//reversing the second half of the sll
+        {
+           ListNode* front = slow->next;
+           slow->next = prev;
+           prev = slow;
+           slow = front;
+        }
+        while ( head != nullptr && prev != nullptr)
+        {
+            if ( head->val != prev->val )
+            return false;
+            head = head->next;
+            prev = prev->next;
+        }
+        return true;
     }
 };

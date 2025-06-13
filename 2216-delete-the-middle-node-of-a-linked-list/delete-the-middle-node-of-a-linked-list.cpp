@@ -16,18 +16,18 @@ public:
             return nullptr;
         }
         ListNode* slow = head;
-        ListNode* fast = head;
-        ListNode* prev = nullptr;
+        ListNode* fast = head->next->next;
+      
 
         while (fast != nullptr && fast->next != nullptr )
         {
             fast = fast->next->next;
-            prev = slow;
+           
             slow = slow->next;
             
         }
-        fast = prev->next;
-        prev->next = prev->next->next;
+        fast = slow->next;
+        slow->next = slow->next->next;
         delete fast;
         return head;
 

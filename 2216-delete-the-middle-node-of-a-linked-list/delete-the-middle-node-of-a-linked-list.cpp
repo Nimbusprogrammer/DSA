@@ -17,20 +17,18 @@ public:
         }
         ListNode* slow = head;
         ListNode* fast = head;
-        int key = 0;
+        ListNode* prev = nullptr;
 
         while (fast != nullptr && fast->next != nullptr )
         {
             fast = fast->next->next;
-            if ( key ==1 )
-            {
-                slow = slow->next;
-            }
-            key =1;
+            prev = slow;
+            slow = slow->next;
+            
         }
-        ListNode* preview = slow->next;
-        slow->next = slow->next->next;
-        delete preview;
+        fast = prev->next;
+        prev->next = prev->next->next;
+        delete fast;
         return head;
 
     }

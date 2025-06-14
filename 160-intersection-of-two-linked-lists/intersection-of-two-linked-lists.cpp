@@ -9,48 +9,51 @@
 class Solution {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        unordered_map <ListNode*  , bool > hashmap;
-        ListNode * p1 = headA ;
-        ListNode* p2 = headB;
-        while ( p1 && p2 )
+        ListNode* p1 = headA;
+        ListNode* p2  =headB;
+        int n = 0;
+        int m = 0;
+        while ( p1)
         {
-            
-            if( hashmap.find(p1) == hashmap.end() )//its not present
-            {
-                hashmap[p1] = true;
-            }
-            else 
-            return p1;
-            if ( hashmap.find(p2) == hashmap.end())
-            {
-                hashmap[p2]= true;
-            }
-            else 
-            return p2;
-            p1= p1->next;
-            p2= p2->next;
-        }
-        while(p1)
-        {
-            if ( hashmap.find(p1) == hashmap.end())
-             {
-                hashmap[p1] = true;
-            }
-            else 
-            return p1;
-            p1 = p1->next;
+            n++;
+            p1=p1->next;
         }
         while ( p2)
         {
-             if ( hashmap.find(p2) == hashmap.end())
-            {
-                hashmap[p2]= true;
-            }
-            else 
-            return p2;
-            
+            m++;
+            p2=p2->next;
+        }
+      int need = abs(m-n);
+      p1= headA;
+      p2 =headB;
+      if ( m>n)
+      {
+        while ( need)
+        {
+            need--;
             p2= p2->next;
         }
-        return nullptr;
+      }
+      else 
+      {while ( need)
+        {
+            need--;
+            p1= p1->next;
+        }
+      }
+      while ( p1 != p2)
+      {
+        p1= p1->next;
+        p2=p2->next;
+      }
+      if ( p1 == p2 && p1 != nullptr)
+      {
+        return p1;
+
+      }
+      else 
+      return nullptr;
+
+
     }
 };

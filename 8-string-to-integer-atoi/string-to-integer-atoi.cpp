@@ -1,32 +1,40 @@
 class Solution {
 public:
-    int myAtoi(string s) {
-        long long ans = 0;
-        int n = s.length();
-        int count = 1;
-        int sign = 1;
-        int i = 0;
-          while ( i < n && s[i] ==' ')
-          i++;
-          if ( i < n  && (s[i] == '-' || s[i] == '+'))
-          {
-            if ( s[i] == '-')
-            sign = -1;
-            i++;
-          }
-          
-            while ( i < n && isdigit(s[i]))
-            {
-                ans = ans * 10 + (s[i]-'0');//making characters into integers
-                if ( sign * ans >= INT_MAX )
-                return INT_MAX;
-                else if ( sign * ans <= INT_MIN)
-                return INT_MIN;
-                i++;
-            }
 
+    int myfunction (string s , int i ,  int n , long long num , int sign)
+    {
+        //BASE CASE
+         if ( i >= n || !isdigit(s[i]) || num*sign >= INT_MAX || num*sign <= INT_MIN)
+         return clamp( num*sign, (long long)INT_MIN , (long long)INT_MAX );
+        //PROCESS
+        num = num*10 + (s[i]-'0');
         
-       return (int)(ans*sign);
-
+        i++;
+        //num *= sign; don't do this as sing flips in every recursive step . just change the sign in the end only.
+        return myfunction(s , i  , n  , num , sign);
+    }
+    int myAtoi(string s) {
+        int i = 0;
+        int n = s.length();
+        long long num = 0;
+         int sign =1 ;
+         while ( !isdigit(s[i]))
+         {
+            if ( isspace(s[i]))
+            i++;
+            else if ( s[i] == '-' || s[i] == '+')
+            {
+                if (  s[i] == '-')
+                sign = -1;
+                else 
+                sign = +1;
+                i++;
+                break;
+            }
+            else 
+            break;
+         }
+        int ans = myfunction(s , i , n , num , sign);
+        return ans;
     }
 };

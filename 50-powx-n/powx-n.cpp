@@ -1,37 +1,33 @@
 class Solution {
 public:
-    double myPow(double x, int n) {
-        if ( n >= 0 )
-        {
-            if ( n == 0)
+       double Power( double x , long long N)
+       {
+            if ( N == 0)
             return 1;
-            else if ( n%2 == 0) 
+            else if ( N%2 == 0) 
             {
-                n = n/2;
-                return myPow(x*x , n);
+                N = N/2;
+                return Power(x*x , N);
             }
             else
             {
-                n = n/2;
-                return x* myPow(x*x , n);
+                N = N/2;
+                return x* Power(x*x , N);
             }
-        }
-        else 
-        {
-            if ( n==0)
-            return 1;
-            else if ( n% 2 == 0) 
+       }
+    double myPow(double x, int n) {
+        long long N = n ;
+            if ( n < 0)
             {
-                n = n/2;
-                return myPow (x*x , n );
+                //   |INT_MIN| = |INT_MAX|+1 // SO IF
+                // n == INT_MIN then if we do N = -n then it overflows as correspoding positive values goes out of bounds of int .so we convert N to long long ,then apply N = -n;
+              //  N = -n; here -n overflows before assigning to N
+               N = n;
+               N *= -1;
+                x = 1/x ;
             }
-            else 
-            {
-                n= n/2;
-                return 1/x * myPow(x*x, n );
-            }
-        }
-        return 0;
+           return Power(x , N);
+       
 
     }
 };

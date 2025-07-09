@@ -6,22 +6,13 @@ public:
     {
         if ( n == 0)
         return 1;
-        if ( n%2  == 0)
+        long long half = power ( num , n/2)%mod;
+        if ( n%2 == 0)
         {
-            n /=2;
-            
-            long long ans = power((num*num)%mod  , n);
-            
-            return ans;
+             return (half *half)%mod;
         }
         else 
-        {
-            n/=2;
-            
-            long long ans = num*power((num*num)%mod   , n);//num*... this also can be exceeding mod or cause integer overflow.
-            ans%= mod;
-            return ans;
-        }
+        return (half* half*num)%mod;
     }
     int countGoodNumbers(long long n) {
          long long even;

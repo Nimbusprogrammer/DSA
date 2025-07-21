@@ -9,11 +9,12 @@ public:
          combosum( candidates , target , i , ans , temp , sum);
          return ans;
     }
-    void combosum(vector<int>& candidates  , int target ,  int i , vector<vector<int>> &ans , vector<int>& temp , int &sum)
+    void combosum(vector<int>& candidates  , int target ,  int i , vector<vector<int>> &ans , vector<int>& temp , int sum)
     {
         if ( sum == target)
          {
             ans.push_back(temp);
+            return;
          } 
          
         if ( i > candidates.size()-1 || sum >= target)

@@ -9,7 +9,7 @@ public:
         combosum(candidates ,target,ans , temp , i , sum);
         return ans;
     }
-    void combosum( vector<int> candidates, int target ,vector<vector<int>>& ans ,vector<int>& temp , int i , int sum )
+    void combosum( vector<int>& candidates, int target ,vector<vector<int>>& ans ,vector<int>& temp , int i , int sum )
     {
         if ( sum > target)
         return;

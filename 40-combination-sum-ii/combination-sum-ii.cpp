@@ -22,7 +22,7 @@ public:
            if ( index > i && candidates[index] == candidates[index-1]) 
            continue;
            if ( candidates[i] > target )
-           break;
+           return;
            temp.push_back(candidates[index]);
            combosum(candidates , target-candidates[index] , ans , temp , index+1);
            temp.pop_back();

@@ -4,35 +4,30 @@ public:
         vector<vector<int>> ans;
         vector<int> temp;
         int i = 0;
-        int sum =0;
+        
         sort(candidates.begin() , candidates.end());
-        combosum(candidates ,target,ans , temp , i , sum);
+        combosum(candidates ,target,ans , temp , i );
         return ans;
     }
-    void combosum( vector<int>& candidates, int target ,vector<vector<int>>& ans ,vector<int>& temp , int i , int sum )
+    void combosum( vector<int>& candidates, int target ,vector<vector<int>>& ans ,vector<int>& temp , int i  )
     {
-        if ( sum > target)
-        return;
-        if ( i == candidates.size())
-        {
-            if ( sum == target)
-            {
-                ans.push_back(temp);
-                
-            }
-            return;
-        }
-        temp.push_back(candidates[i]);
-        sum+=candidates[i];
-        combosum(candidates ,target,ans , temp , i+1 , sum);
-        int index = i+1;
-        sum-=candidates[i];
-        temp.pop_back();
-        while ( index < candidates.size() && candidates[index] == candidates[i] )
-        {
-              index++;
-        }
-        combosum(candidates ,target,ans , temp , index , sum);
+       //base 
+       if ( target == 0)
+       {
+          ans.push_back(temp);
+          return;
+       }
+       for ( int index = i ; index < candidates.size() ; index++)
+       {
+           if ( index > i && candidates[index] == candidates[index-1]) 
+           continue;
+           if ( candidates[i] > target )
+           break;
+           temp.push_back(candidates[index]);
+           combosum(candidates , target-candidates[index] , ans , temp , index+1);
+           temp.pop_back();
+       }
+    
         
     }
 };

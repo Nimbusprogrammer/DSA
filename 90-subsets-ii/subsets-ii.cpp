@@ -1,21 +1,20 @@
 class Solution {
 public:
-void powerset(vector<int>& nums , vector<int>& temp , int i , vector<vector<int>> &ans )
+void powerset(vector<int>& nums , vector<int>& temp , int index , vector<vector<int>> &ans )
 {
-    if ( i == nums.size())
-    {
+   
         ans.push_back(temp);
-        return ;
-    }
-    temp.push_back(nums[i]);
-    powerset(nums, temp , i+1 , ans);
-    temp.pop_back();
-    int index = i+1;
-    while ( index < nums.size() && nums[index ] == nums[index-1])
+   
+    for ( int i = index  ; i < nums.size() ; i++)
     {
-        index++;
+        if ( i > index && nums[i] == nums[i-1])
+        continue;
+        temp.push_back(nums[i]);
+        powerset(nums, temp , i+1  , ans);
+        temp.pop_back();
+        
     }
-    powerset(nums, temp , index , ans);
+    
 
 }
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {

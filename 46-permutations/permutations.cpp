@@ -1,22 +1,20 @@
 class Solution {
 public:
-void giveperm( vector<int>& nums , vector<vector<int>> &ans, vector<int> &temp , vector<int> &arr)
+void giveperm( int index , vector<int>& nums , vector<vector<int>> &ans )
 {
-        if ( temp.size() == nums.size())
-        {
-            ans.push_back(temp);
+            if ( index == nums.size())
+            {ans.push_back(nums);
             return;
-        }
-        for ( int i = 0 ; i < nums.size() ; i++)
+            }
+        for ( int i = index ; i < nums.size() ; i++)
         {
-            if( arr[i] == 0)
-           {
-           temp.push_back(nums[i]);
-           arr[i] = 1;
-           giveperm(nums, ans, temp,arr);
-           temp.pop_back();
-           arr[i] = 0;
-           }
+            
+             swap(nums[i] , nums[index])  ;
+             
+              giveperm(index+1,nums, ans);
+             swap( nums[i] , nums[index]);
+             
+           
         }
 
 }
@@ -26,8 +24,8 @@ void giveperm( vector<int>& nums , vector<vector<int>> &ans, vector<int> &temp ,
         vector<vector<int>> ans;
         
         vector<int> arr(nums.size() , 0);
-        vector<int> temp ;
-        giveperm(nums, ans ,  temp,arr);
+        int index  =0 ;
+        giveperm(index ,nums, ans );
         return ans;
     }
 };

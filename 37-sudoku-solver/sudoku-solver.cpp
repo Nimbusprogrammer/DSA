@@ -1,42 +1,62 @@
 class Solution {
 public:
-    bool issafe(vector<vector<char>>& board, char val, int row, int col) {
-        for (int k = 0; k < 9; k++) {
-            if (board[row][k] == val) return false;
-            if (board[k][col] == val) return false;
-        }
-        int r = (row / 3) * 3;
-        int c = (col / 3) * 3;
-        for (int i = r; i < r + 3; i++) {
-            for (int j = c; j < c + 3; j++) {
-                if (board[i][j] == val) return false;
-            }
-        }
-        return true;
+bool issafe( vector<vector<char>>& board , int row , int col , int temp)
+{
+    temp = temp+'0';
+    for ( int i = 0 ; i < 9 ; i++ )
+    {
+        if ( board[row][i] == temp)
+        return false;
+        if ( board[i][col] == temp)
+        return false;
     }
-
-    bool helper(vector<vector<char>>& board, int row, int col) {
-        // Base case: solved
-        if (row == 9) return true;
-
-        // Move to next row if col == 9
-        if (col == 9) return helper(board, row + 1, 0);
-
-        // Skip filled cells
-        if (board[row][col] != '.') return helper(board, row, col + 1);
-
-        // Try placing digits 1 to 9
-        for (char ch = '1'; ch <= '9'; ch++) {
-            if (issafe(board, ch, row, col)) {
-                board[row][col] = ch;
-                if (helper(board, row, col + 1)) return true;
-                board[row][col] = '.'; // backtrack
-            }
+    int rowstart = (row /3 )*3;
+    int colstart = (col/3)*3;
+    for ( int j = rowstart ; j < rowstart +3 ; j++)
+    {
+        for ( int k = colstart ; k < colstart+3 ; k++)
+        {
+             if ( board [j][k] == temp)
+             return false;
         }
-        return false; // no valid number found
     }
+    return true;
+}
 
+bool helper (vector<vector<char>>& board , int row , int col )
+ {
+    //base cases as we should use recursion to check every element possible for every entry
+    if ( row == 9)
+    return true;
+    int nextrow = row ;
+    int nextcol = col+1;
+    if ( nextcol == 9 )
+    {
+        nextrow = row+1;
+        nextcol = 0;
+    }
+    if ( board[row][col] != '.')
+    {
+        return helper ( board ,nextrow , nextcol );
+
+    }
+    for ( int i =1 ; i <= 9  ; i++)
+    {
+        
+        if ( issafe( board , row , col , i)  )
+        {
+            board[row][col] = i + '0';
+            if ( helper ( board , nextrow , nextcol))
+            return true;
+            board[row ][col] = '.';
+        }
+        
+    }
+    return false;
+
+
+ }
     void solveSudoku(vector<vector<char>>& board) {
-        helper(board, 0, 0);
+        helper ( board , 0 , 0 );
     }
 };

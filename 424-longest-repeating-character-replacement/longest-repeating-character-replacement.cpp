@@ -8,12 +8,12 @@ public:
         map < int ,int > mpp;
         while ( r < s.size()){
                     mpp[s[r]]++;
-                    maxfre = 0;
-                    for ( auto &p : mpp){
+                   
+                    
                          
-                          maxfre = max( maxfre ,p.second);
+                          maxfre = max( maxfre ,mpp[s[r]]);
                           
-                    }
+                    
                     chars = r-l+1;
                     if ( chars - maxfre > k){
                         
@@ -26,7 +26,7 @@ public:
                     }
                     if ( chars-maxfre <= k){
                         maxlen = max ( maxlen , r-l+1);
-                    }
+                    } 
                     r++;
         }
         return maxlen;

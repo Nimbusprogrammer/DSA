@@ -4,7 +4,7 @@ int atmost(vector<int>& nums, int k ){
     if ( k <= 0){
         return 0;
     }
-     map<int , int > mpp;
+     unordered_map<int , int > mpp;
      int l = 0 , r= 0 , count = 0;
      while ( r < nums.size()){
            mpp[nums[r]]++;
